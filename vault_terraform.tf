@@ -39,6 +39,19 @@ resource "aws_instance" "nginx" {
       "sudo service nginx start"
     ]
   }
+
+
+  provisioner "file" {
+    source      = "vault_install.sh"
+    destination = "/tmp/script.sh"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/script.sh",
+      "/tmp/script.sh args",
+    ]
+  }
 }
 
 ##################################################################################
