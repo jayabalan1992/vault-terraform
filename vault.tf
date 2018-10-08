@@ -20,17 +20,9 @@ provider "aws" {
 # RESOURCES
 ##################################################################################
 
-resource "aws_instance" "vault" {
-  ami           = "ami-06b5810be11add0e2"
-  instance_type = "t2.micro"
+data "aws_caller_identity" "current" { }
 
-  connection {
-    user        = "ec2-user"
-#    private_key = "${file(var.private_key_path)}"
-  }
-
-  provisioner "local-exec" {
-    command = "echo ${aws_instance.vault.public_ip} > ip_address.txt"
-  }
-
+module "consul" {
+  source  = "hashicorp/consul/aws"
+  num_servers = 3
 }
