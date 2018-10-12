@@ -22,6 +22,22 @@ provider "aws" {
 
 data "aws_caller_identity" "current" { }
 
+resource "aws_instance" "example" {
+  ami           = "${var.ami}"
+  instance_type = "t2.micro"
+   provisioner "file" {
+    source      = "vault.sh"
+    destination = "/tmp/vault.sh"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/vault.sh",
+      "/tmp/vault.sh",
+    ]
+  }
+}
+
 module "consul" {
   source  = "hashicorp/consul/aws"
   num_servers = 3
