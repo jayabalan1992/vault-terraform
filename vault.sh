@@ -22,6 +22,7 @@ cat << EOF > /usr/local/etc/consul/client_agent.json
   "data_dir": "/var/consul/data",
   "bind_addr": "${localip}",
   "client_addr": "127.0.0.1",
+  "retry_join": ["ip1", "ip2", "ip3"],
   "log_level": "DEBUG",
   "enable_syslog": true,
   "acl_enforce_version_8": false
@@ -76,7 +77,7 @@ cat <<EOF > /etc/vault.d/config.hcl
 listener "tcp" {
   address          = "0.0.0.0:8200"
   cluster_address  = "${localip}:8201"
-  tls_disable      = "false"
+  tls_disable      = "true"
   tls_cert_file="/etc/vault.d/domain.crt"
   tls_key_file="/etc/vault.d/domain.key"
 }
