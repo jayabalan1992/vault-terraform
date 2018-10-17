@@ -22,7 +22,6 @@ cat << EOF > /usr/local/etc/consul/client_agent.json
   "data_dir": "/var/consul/data",
   "bind_addr": "${localip}",
   "client_addr": "127.0.0.1",
-  "retry_join": ["server-1-ip", "server-2-ip","server-3-ip"],    
   "log_level": "DEBUG",
   "enable_syslog": true,
   "acl_enforce_version_8": false
@@ -87,6 +86,7 @@ storage "consul" {
   path    = "vault/"
 }
 
+ui = "true"
 api_addr = "http://${localip}:8200"
 cluster_addr = "http://${localip}:8201"
 EOF

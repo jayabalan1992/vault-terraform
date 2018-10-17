@@ -24,7 +24,6 @@ cat << EOF > /usr/local/etc/consul/server_agent.json
   "client_addr": "0.0.0.0",
   "advertise_addr": "${localip}",
   "bootstrap_expect": 3,
-  "retry_join": ["<server 1 ip>", "<server -2 ip>","server 3 ip>"],
   "ui": true,
   "log_level": "DEBUG",
   "enable_syslog": true,
